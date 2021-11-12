@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+      <%= form_with model:@tweet, local:true do |f| %>
+      <div>
+        <label for="inputTitle">タイトル</label>
+        <p><%= f.text_field :title, autofocus: true, id:"inputTitle" %></p>
+      </div>
+      <div>
+        <label for="inputBody">内容</label>
+        <p><%= f.text_area :body, id:"inputBody" %></p>
+      </div>
+      <div>
+        <label for="inputImage">投稿画像</label>
+        <p><%= f.attachment_field :tweet_image, id:"inputImage" %></p>
+      </div>
+      <div class="mb-3">
+         <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

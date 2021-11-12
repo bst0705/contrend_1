@@ -1,0 +1,64 @@
+<div class="container px-5 px-sm-0">
+    <!--下のおすすめをリンク表示する-->
+    <h2><%= @customer.name %>さん、本日のおすすめはご覧になりましたか？</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="d-culmn">
+                <div class="d-flex">
+                    <%= attachment_image_tag @customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                    <% if @customer.id == current_customer.id %>
+                        <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p>
+                    <% end %>
+                </div>
+                <%= @customer.name %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td><%= @customer.name %></td>
+                  <td></td>
+                  <td><%= @customer.introduction %></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+
+  <div class="row offset-md-1">
+    <h2><%= @customer.name %>さんの投稿一覧</h2>
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <% @customer.tweets.each do |tweet| %>
+      <tbody>
+        <tr>
+          <td>
+            <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+          </td>
+          <td>
+            <%= link_to tweet_path(tweet.id) do %>
+                <%= tweet.title %>
+            <% end %>
+          </td>
+          <td>
+            <%= tweet.body %>
+          </td>
+          <td>
+              PV数　<%= tweet.impressions_count %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
+<%= paginate @tweets %>

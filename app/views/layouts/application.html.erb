@@ -3,12 +3,53 @@
   <head>
     <title>Contrend</title>
     <%= csrf_meta_tags %>
-
+    <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand">
+        <div class="container">
+          <a class="logo" href="/"><span><%= image_tag 'autumn-6769712_1280', size: '150x100' %></span></a>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+              <% if admin_signed_in? %>
+                <li class="nav-item"><%= link_to "会員一覧", admin_customers_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "投稿一覧", admin_tweets_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "問い合わせ一覧", admin_contacts_path, class:"nav-link" %></li>
+                <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %></li>
+              <% elsif customer_signed_in? %>
+                <li class="nav-item"><%= link_to "おすすめ", ranks_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "マイページ", customer_path(current_customer.id), class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "新規投稿", new_tweet_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"nav-link" %></li>
+              <% else %>
+                <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "おすすめ", ranks_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class:"nav-link" %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
     <%= yield %>
+    <footer class="bg-dark text-white">
+      <div class='container'>
+  	    <div class='row text-center'>
+    	    <div>
+    		    <p class=footer>contrender</p>
+    	    </div>
+    	    <div class='ml-auto'>
+    		    <p class=footer>お問い合わせ</p>
+    	    </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
     resources :comments
     resources :contacts
-    resources :customers
+    resources :customers, only: [:index, :show, :edit, :update]
     resources :likes
     resources :notifications
     resources :ranks
