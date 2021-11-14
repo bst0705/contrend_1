@@ -22,12 +22,13 @@ class Customer::TweetsController < ApplicationController
   end
 
   def index
-    @tweets = Tweet.all.order(updated_at: :desc)
+    @tweets = Tweet.order(updated_at: :desc).page(params[:page]).per(5)
     #@rank_tweets = Tweet.order(impressions_count: 'DESC')
   end
 
   def show
     @tweet = Tweet.find(params[:id])
+    @tweet_comment = Comment.new
     impressionist(@tweet, nil, unique: [:ip_address])
   end
 

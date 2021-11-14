@@ -5,7 +5,17 @@ class Customer::CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    @tweets = @customer.tweets.page(params[:page]).reverse_order
+    @tweets = @customer.tweets.page(params[:page]).per(5)
+  end
+
+  def followings
+    customer = Customer.find(params[:id])
+    @customers = customer.followings
+  end
+
+  def followers
+    customer = Customer.find(params[:id])
+    @customers = customer.followers
   end
 
   def edit

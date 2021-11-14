@@ -1,14 +1,31 @@
 <div class="container px-5 px-sm-0">
     <!--下のおすすめをリンク表示する-->
-    <h2><%= @customer.name %>さん、本日のおすすめはご覧になりましたか？</h2>
+    <h2><%= current_customer.name %>さん、本日のおすすめはご覧になりましたか？</h2>
     <div class="row">
         <div class="col-md-3">
             <div class="d-culmn">
                 <div class="d-flex">
-                    <%= attachment_image_tag @customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-                    <% if @customer.id == current_customer.id %>
-                        <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p>
+                  <%= attachment_image_tag @customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                  <% if @customer.id == current_customer.id %>
+                      <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p><br>
+                  <% end %>
+
+                  <p class="text-small">
+                    <%= link_to @customer.followings.count, followings_customer_path(@customer) %> フォロー<br>
+                    <%= link_to @customer.followers.count, followers_customer_path(@customer) %> フォロワー<br>
+                  </p>
+
+                  <% if @customer.id != current_customer.id %>
+                    <% if @customer.is_followed_by?(current_customer) %>
+                      <%=link_to customer_relationships_path(@customer), method: :delete do %>
+                        <button type="button" class="btn btn btn-danger">フォロー解除</button>
+                      <% end %>
+                    <% else %>
+                      <%=link_to customer_relationships_path(@customer), method: :post do %>
+                        <button type="button" class="btn btn btn-primary">フォロー</button>
+                      <% end %>
                     <% end %>
+                  <% end %>
                 </div>
                 <%= @customer.name %>
             </div>
@@ -18,7 +35,7 @@
               <tbody>
                 <tr>
                   <td></td>
-                  <td><%= @customer.name %></td>
+                  <td><h4>自己紹介</h4></td>
                   <td></td>
                   <td><%= @customer.introduction %></td>
                 </tr>

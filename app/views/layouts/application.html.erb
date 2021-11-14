@@ -26,11 +26,13 @@
                 <li class="nav-item"><%= link_to "マイページ", customer_path(current_customer.id), class:"nav-link" %></li>
                 <li class="nav-item"><%= link_to "新規投稿", new_tweet_path, class:"nav-link" %></li>
                 <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"nav-link" %></li>
+                <li class="nav-item"><%= render partial: 'customer/searches/searchform' %></li>
               <% else %>
                 <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link" %></li>
                 <li class="nav-item"><%= link_to "おすすめ", ranks_path, class:"nav-link" %></li>
                 <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class:"nav-link" %></li>
                 <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= render partial: 'customer/searches/searchform' %></li>
               <% end %>
             </ul>
           </div>
@@ -38,9 +40,12 @@
       </nav>
     </header>
 
+    <main class="mb-5">
     <%= yield %>
-    <footer class="bg-dark text-white">
-      <div class='container'>
+    </main>
+
+    <footer class=" bg-dark text-white fixed-bottom">
+      <div class='container mt-10'>
   	    <div class='row text-center'>
     	    <div>
     		    <p class=footer>contrender</p>
