@@ -1,0 +1,15 @@
+<% if customer_signed_in? %>
+  <% if tweet.liked_by?(current_customer) %>
+    <p>
+      <%= link_to tweet_likes_path(tweet), method: :delete, remote: true do %>
+        ♥<%= tweet.likes.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to tweet_likes_path(tweet), method: :post, remote: true do %>
+        ♡<%= tweet.likes.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+<% end %>

@@ -6,6 +6,7 @@ class Customer::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @tweets = @customer.tweets.page(params[:page]).per(5)
+    @timelines = Tweet.where(customer_id: [current_customer.id, *current_customer.following_ids]).order(created_at: :desc)
   end
 
   def followings

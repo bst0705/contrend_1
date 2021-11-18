@@ -1,0 +1,11 @@
+<% if customer.id != current_customer.id %>
+  <% if customer.is_followed_by?(current_customer) %>
+    <%=link_to customer_relationships_path(customer), method: :delete, remote: true do %>
+      <button type="button" class="btn btn btn-danger">フォロー解除</button>
+    <% end %>
+  <% else %>
+    <%=link_to customer_relationships_path(customer), method: :post, remote: true do %>
+      <button type="button" class="btn btn btn-primary">フォロー</button>
+    <% end %>
+  <% end %>
+<% end %>

@@ -10,8 +10,16 @@ Rails.application.routes.draw do
   end
 
   scope module: :customer do
-    root 'ranks#index'
+    root 'ranks#monthrank'
     get '/search', to: 'searches#search'
+    get 'ranks/dayrank', to: 'ranks#dayrank', as: 'dayrank'
+    get 'ranks/weekrank', to: 'ranks#weekrank', as: 'weekrank'
+    get 'ranks/monthrank', to: 'ranks#monthrank', as: 'monthrank'
+    get 'ranks/yearrank', to: 'ranks#yearrank', as: 'yearrank'
+        # get :dayrank
+        # get :weekrank
+        # get :monthrank
+        # get :yearrank
 
     resources :comments
     resources :contacts
@@ -21,7 +29,6 @@ Rails.application.routes.draw do
       get :followers, on: :member
     end
     resources :notifications
-    resources :ranks
     resources :relationships
     resources :tweets do
       resource :likes, only: [:create, :destroy]

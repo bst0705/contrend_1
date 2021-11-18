@@ -1,3 +1,4 @@
+<% if @customer.id != current_customer.id %>
 <div class="container px-5 px-sm-0">
     <!--下のおすすめをリンク表示する-->
     <h2><%= current_customer.name %>さん、本日のおすすめはご覧になりましたか？</h2>
@@ -15,17 +16,12 @@
                     <%= link_to @customer.followers.count, followers_customer_path(@customer) %> フォロワー<br>
                   </p>
 
-                  <% if @customer.id != current_customer.id %>
-                    <% if @customer.is_followed_by?(current_customer) %>
-                      <%=link_to customer_relationships_path(@customer), method: :delete do %>
-                        <button type="button" class="btn btn btn-danger">フォロー解除</button>
-                      <% end %>
-                    <% else %>
-                      <%=link_to customer_relationships_path(@customer), method: :post do %>
-                        <button type="button" class="btn btn btn-primary">フォロー</button>
-                      <% end %>
-                    <% end %>
+                  <% if customer_signed_in? %>
+                    <div id="follows_buttons_<%= @customer.id %>">
+                      <%= render partial: 'customer/customers/followbuttons', locals: { customer: @customer} %>
+                    </div>
                   <% end %>
+
                 </div>
                 <%= @customer.name %>
             </div>
@@ -78,4 +74,89 @@
     </table>
   </div>
 </div>
+<% end %>
+
+
+
+
+<% if @customer.id == current_customer.id %>
+<div class="container px-5 px-sm-0">
+    <!--下のおすすめをリンク表示する-->
+    <h2><%= current_customer.name %>さん、本日のおすすめはご覧になりましたか？</h2>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="d-culmn">
+                <div class="d-flex">
+                  <%= attachment_image_tag @customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                  <% if @customer.id == current_customer.id %>
+                      <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p><br>
+                  <% end %>
+
+                  <p class="text-small">
+                    <%= link_to @customer.followings.count, followings_customer_path(@customer) %> フォロー<br>
+                    <%= link_to @customer.followers.count, followers_customer_path(@customer) %> フォロワー<br>
+                  </p>
+
+                  <% if customer_signed_in? %>
+                    <div id="follows_buttons_<%= @customer.id %>">
+                      <%= render partial: 'customer/customers/followbuttons', locals: { customer: @customer} %>
+                    </div>
+                  <% end %>
+
+                </div>
+                <%= @customer.name %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td><h4>自己紹介</h4></td>
+                  <td></td>
+                  <td><%= @customer.introduction %></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+
+  <div class="row offset-md-1">
+    <h2>最新の投稿一覧</h2>
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <% @timelines.each do |tweet| %>
+      <tbody>
+        <tr>
+          <td>
+            <%= link_to customer_path(tweet.customer.id) do %>
+              <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br>
+              <%= tweet.customer.name %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to tweet_path(tweet.id) do %>
+              <%= tweet.title %>
+            <% end %>
+          </td>
+          <td>
+            <%= tweet.body %>
+          </td>
+          <td>
+              PV数　<%= tweet.impressions_count %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
 <%= paginate @tweets %>
+<% end %>

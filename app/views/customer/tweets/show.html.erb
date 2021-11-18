@@ -11,21 +11,9 @@
         <%= link_to tweet_path(@tweet.id) do %>
         <%= @tweet.title %><br>
         <% end %>
-
-        <% if @tweet.liked_by?(current_customer) %>
-          <p>
-            <%= link_to tweet_likes_path(@tweet), method: :delete do %>
-              ♥<%= @tweet.likes.count %> いいね
-            <% end %>
-          </p>
-          <% else %>
-          <p>
-            <%= link_to tweet_likes_path(@tweet), method: :post do %>
-              ♡<%= @tweet.likes.count %> いいね
-            <% end %>
-          </p>
-        <% end %>
-
+      </td>
+      <td id="likes_buttons_<%= @tweet.id %>">
+        <%= render partial: 'customer/likes/like', locals: { tweet: @tweet} %>
       </td>
       <td><%= @tweet.body %></td>
       <td>PV数　<%= @tweet.impressions_count %></td>
