@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :admins
+  devise_for :admin, skip: [:registration]
   devise_for :customers
+  #, :controllers => {
+  #  :sessions => 'customer/sessions'
+  #}
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
@@ -16,17 +19,14 @@ Rails.application.routes.draw do
     get 'ranks/weekrank', to: 'ranks#weekrank', as: 'weekrank'
     get 'ranks/monthrank', to: 'ranks#monthrank', as: 'monthrank'
     get 'ranks/yearrank', to: 'ranks#yearrank', as: 'yearrank'
-        # get :dayrank
-        # get :weekrank
-        # get :monthrank
-        # get :yearrank
-
     resources :comments
     resources :contacts
     resources :customers, only: [:index, :show, :edit, :update]do
       resource :relationships, only: [:create, :destroy]
       get :followings, on: :member
       get :followers, on: :member
+      patch 'withdraw' => 'customers#withdraw', as: 'withdraw'
+      get 'unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     end
     resources :notifications
     resources :relationships

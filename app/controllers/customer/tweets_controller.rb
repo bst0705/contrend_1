@@ -1,4 +1,6 @@
 class Customer::TweetsController < ApplicationController
+  before_action :correct_tweet,only: [:edit]
+  before_action :authenticate_customer!, except: [:index,:destroy]
 
   def new
     @tweet = Tweet.new
@@ -23,7 +25,6 @@ class Customer::TweetsController < ApplicationController
 
   def index
     @tweets = Tweet.order(updated_at: :desc).page(params[:page]).per(5)
-    #@rank_tweets = Tweet.order(impressions_count: 'DESC')
   end
 
   def show
@@ -35,7 +36,14 @@ class Customer::TweetsController < ApplicationController
   def destroy
     @tweet = Tweet.find(params[:id])
     @tweet.destroy
-    redirect_to customer_path(current_customer.id)
+    redirect_to tweets_path
+  end
+
+  def correct_tweet
+        @tweet = Tweet.find(params[:id])
+    unless @tweet.customer.id == current_customer.id
+      redirect_to customer_path
+    end
   end
 
 

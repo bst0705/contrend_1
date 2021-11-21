@@ -18,8 +18,12 @@ class Customer < ApplicationRecord
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: :follower_id
   has_many :followers, through: :reverse_of_relationships, source: :following
 
-  def is_followed_by?(user)
-    reverse_of_relationships.find_by(following_id: user.id).present?
+  def is_followed_by?(customer)
+    reverse_of_relationships.find_by(following_id: customer.id).present?
   end
-  
+
+  def active_for_authentication?
+    super && self.is_valid
+  end
+
 end

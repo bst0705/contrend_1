@@ -11,11 +11,16 @@
         <p><%= f.text_area :introduction, autofocus: true, id:"inputintroduction" %></p>
       </div>
       <div>
-      <label for="inputImage">Image</label>
+        <label for="inputImage">Image</label>
         <p><%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %></p>
       </div>
       <div class="mb-3">
          <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
+      <% end %>
+      <%= link_to customer_unsubscribe_path(@customer) do %>
+        <div class="btn btn-danger">
+          退会する
+        <div>
       <% end %>
       </div>
     </div>

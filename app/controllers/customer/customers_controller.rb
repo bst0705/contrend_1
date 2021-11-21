@@ -1,7 +1,5 @@
 class Customer::CustomersController < ApplicationController
-
-  def index
-  end
+  before_action :authenticate_customer!
 
   def show
     @customer = Customer.find(params[:id])
@@ -27,6 +25,24 @@ class Customer::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     @customer.update(customer_params)
     redirect_to customer_path(@customer.id)
+  end
+
+  def correct_customer
+    @customer = Customer.find(params[:id])
+    unless @customer.id == current_customer.id
+      redirect_to customer_path
+    end
+  end
+
+  def unsubscribe
+    @customer = Customer.find_by(email: params[:email])
+  end
+
+  def withdraw
+    @customer = Customer.find(current_customer.id)
+    @customer.update(is_valid: false)
+    reset_session
+    redirect_to root_path
   end
 
   private

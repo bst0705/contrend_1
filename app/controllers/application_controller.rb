@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
     tweets_path
   end
 
+  def if_not_admin
+    redirect_to root_path unless current_admin
+  end
+
   protected
 
   def configure_permitted_parameters

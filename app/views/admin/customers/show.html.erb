@@ -1,0 +1,72 @@
+<div class="container px-5 px-sm-0">
+    <h2 class="customers my-4 px-1 text-center">
+      <%= @customer.name %>さんの会員詳細
+    </h2>
+
+    <table class="table border-0">
+        <tbody>
+          <tr>
+            <td class="border-0 text-left"></td>
+            <td class="border-0 text-left d-flex">
+              <p class="mr-4"><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0 text-left">会員ID</td>
+            <td class="border-0 text-left"><%= @customer.id %></td>
+          </tr>
+          <tr>
+            <td class="border-0 text-left">氏名</td>
+            <td class="border-0 text-left"><%= @customer.name %></td>
+          </tr>
+          <tr>
+            <td class="border-0 text-left">メールアドレス</td>
+            <td class="border-0 text-left"><%= @customer.email %></td>
+          </tr>
+          <tr>
+            <td class="border-0 text-left">会員ステータス</td>
+            <td class="border-0 text-left">
+              <% if @customer.is_valid == true %>
+                <p class="text-success">有効</p>
+              <% else %>
+                <p class="text-muted">退会</p>
+              <% end %>
+            </td>
+          </tr>
+       </tbody>
+    </table>
+
+  <div class="row offset-md-1">
+    <h2><%= @customer.name %>さんの投稿一覧</h2>
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Title</th>
+          <th>Opinion</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <% @customer.tweets.each do |tweet| %>
+      <tbody>
+        <tr>
+          <td>
+            <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+          </td>
+          <td>
+            <%= link_to tweet_path(tweet.id) do %>
+                <%= tweet.title %>
+            <% end %>
+          </td>
+          <td>
+            <%= tweet.body %>
+          </td>
+          <td>
+              PV数　<%= tweet.impressions_count %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
