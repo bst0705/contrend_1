@@ -9,8 +9,11 @@ class Customer::TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.customer_id = current_customer.id
-    @tweet.save
-    redirect_to tweets_path
+    if @tweet.save
+      redirect_to tweets_path
+    else
+      render :new
+    end
   end
 
   def edit
@@ -24,7 +27,7 @@ class Customer::TweetsController < ApplicationController
   end
 
   def index
-    @tweets = Tweet.order(updated_at: :desc).page(params[:page]).per(5)
+    @tweets = Tweet.includes(:customer).order(updated_at: :desc).page(params[:page]).per(5)
   end
 
   def show

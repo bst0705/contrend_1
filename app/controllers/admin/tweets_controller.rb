@@ -2,7 +2,7 @@ class Admin::TweetsController < ApplicationController
   before_action :if_not_admin
 
   def index
-    @tweets = Tweet.order(updated_at: :desc).page(params[:page]).per(5)
+    @tweets = Tweet.includes(:customer).order(updated_at: :desc).page(params[:page]).per(5)
   end
 
   def show

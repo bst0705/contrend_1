@@ -70,3 +70,5 @@ gem 'enum_help'
 
 gem 'impressionist', '~>1.6.1'
 
+gem 'slim-rails'
+

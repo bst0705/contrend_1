@@ -2,18 +2,18 @@ class Customer::CustomersController < ApplicationController
   before_action :authenticate_customer!
 
   def show
-    @customer = Customer.find(params[:id])
+    @customer = Customer.includes(:tweets).find(params[:id])
     @tweets = @customer.tweets.page(params[:page]).per(5)
-    @timelines = Tweet.where(customer_id: [current_customer.id, *current_customer.following_ids]).order(created_at: :desc)
+    @timelines = Tweet.includes(:customer).where(customer_id: [current_customer.id, *current_customer.following_ids]).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def followings
-    customer = Customer.find(params[:id])
+    customer = Customer.includes(:relationships).find(params[:id])
     @customers = customer.followings
   end
 
   def followers
-    customer = Customer.find(params[:id])
+    customer = Customer.includes(:relationships).find(params[:id])
     @customers = customer.followers
   end
 

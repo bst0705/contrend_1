@@ -1,3 +1,22 @@
+
+   <div class="row">
+      <div id="box">
+        <div id="images">
+          <%= link_to dayrank_path, class: 'rankimages' do %>
+            <div class="image1"></div>
+          <% end %>
+          <%= link_to weekrank_path, class: 'rankimages' do %>
+            <div class="image2"></div>
+          <% end %>
+          <%= link_to monthrank_path, class: 'rankimages' do %>
+            <div class="image3"></div>
+          <% end %>
+          <%= link_to yearrank_path, class: 'rankimages' do %>
+            <div class="image4"></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
 <% @tweets.each do |tweet| %>
   <div class="container d-flex justify-content-center">
     <div class="d-flex">

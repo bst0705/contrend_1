@@ -1,0 +1,25 @@
+<% customers.each do |customer| %>
+  <div class="row">
+        <div class="col-md-3">
+            <div class="d-culmn">
+                <div class="d-flex">
+                  <%= link_to admin_customer_path(customer.id) do %>
+                    <%= attachment_image_tag customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                  <% end %>
+                </div>
+                <%= customer.name %>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td><%= customer.name %></td>
+                  <td></td>
+                  <td><%= customer.introduction %></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+<% end %>

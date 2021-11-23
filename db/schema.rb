@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_060310) do
+ActiveRecord::Schema.define(version: 2021_11_22_050515) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2021_11_14_060310) do
   end
 
   create_table "contacts", force: :cascade do |t|
-    t.string "contact_name"
-    t.string "contact_email"
-    t.string "contact_phone"
-    t.string "contact_genre"
-    t.text "contact_introduction"
+    t.string "contact_name", null: false
+    t.string "contact_email", null: false
+    t.string "contact_phone", null: false
+    t.string "contact_genre", default: "0", null: false
+    t.text "contact_introduction", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_060310) do
     t.string "impressionable_type"
     t.integer "impressionable_id"
     t.integer "user_id"
+    t.integer "tweet_id"
     t.string "controller_name"
     t.string "action_name"
     t.string "view_name"
@@ -97,14 +98,14 @@ ActiveRecord::Schema.define(version: 2021_11_14_060310) do
   create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
-    t.integer "post_id"
+    t.integer "tweet_id"
     t.integer "comment_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["comment_id"], name: "index_notifications_on_comment_id"
-    t.index ["post_id"], name: "index_notifications_on_post_id"
+    t.index ["tweet_id"], name: "index_notifications_on_tweet_id"
     t.index ["visited_id"], name: "index_notifications_on_visited_id"
     t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   namespace :admin do
+    root 'customers#index'
+    get '/search', to: 'searches#search'
     resources :customers
     resources :tweets
     resources :contacts
@@ -28,7 +30,7 @@ Rails.application.routes.draw do
       patch 'withdraw' => 'customers#withdraw', as: 'withdraw'
       get 'unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'
     end
-    resources :notifications
+    resources :notifications, only: :index
     resources :relationships
     resources :tweets do
       resource :likes, only: [:create, :destroy]

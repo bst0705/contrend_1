@@ -4,6 +4,7 @@ class CreateImpressionsTable < ActiveRecord::Migration[5.2]
       t.string :impressionable_type
       t.integer :impressionable_id
       t.integer :user_id
+      t.integer :tweet_id
       t.string :controller_name
       t.string :action_name
       t.string :view_name

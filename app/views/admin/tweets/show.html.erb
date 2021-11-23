@@ -12,9 +12,6 @@
         <%= @tweet.title %><br>
         <% end %>
       </td>
-      <td id="likes_buttons_<%= @tweet.id %>">
-        <%= render partial: 'customer/likes/like', locals: { tweet: @tweet} %>
-      </td>
       <td><%= @tweet.body %></td>
       <td>PV数　<%= @tweet.impressions_count %></td>
       <td>
