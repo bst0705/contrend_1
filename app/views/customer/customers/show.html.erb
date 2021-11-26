@@ -6,7 +6,7 @@
         <div class="col-md-3">
             <div class="d-culmn">
                 <div class="d-flex">
-                  <%= attachment_image_tag @customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                  <%= attachment_image_tag @customer, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
                   <% if @customer.id == current_customer.id %>
                       <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p><br>
                   <% end %>
@@ -16,18 +16,15 @@
                     <%= link_to @customer.followers.count, followers_customer_path(@customer) %> フォロワー<br>
                   </p>
 
-                  <% if customer_signed_in? %>
-                    <div id="follows_buttons_<%= @customer.id %>">
-                      <%= render partial: 'customer/customers/followbuttons', locals: { customer: @customer} %>
-                    </div>
-                  <% end %>
-
+                  <div id="follows_buttons_<%= @customer.id %>">
+                    <%= render partial: 'customer/customers/followbuttons', locals: { customer: @customer} %>
+                  </div>
                 </div>
                 <%= @customer.name %>
             </div>
         </div>
         <div class="col-md-8">
-            <table class="table">
+            <table class="table table-hover table-inverse table-responsive">
               <tbody>
                 <tr>
                   <td></td>
@@ -42,13 +39,13 @@
 
   <div class="row offset-md-1">
     <h2><%= @customer.name %>さんの投稿一覧</h2>
-    <table class="table table-hover table-inverse">
+    <table class="table table-hover table-inverse table-responsive">
       <thead>
         <tr>
+          <th>投稿者</th>
+          <th  colspan="3">投稿</th>
           <th></th>
-          <th>Title</th>
-          <th>Opinion</th>
-          <th colspan="3"></th>
+          <th></th>
         </tr>
       </thead>
       <% @customer.tweets.each do |tweet| %>
@@ -57,13 +54,16 @@
           <td>
             <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
           </td>
-          <td>
+          <td class="text-nowrap">
             <%= link_to tweet_path(tweet.id) do %>
                 <%= tweet.title %>
             <% end %>
           </td>
           <td>
             <%= tweet.body %>
+          </td>
+          <td id="likes_buttons_<%= tweet.id %>" class="align-middle text-nowrap">
+            <%= render partial: 'customer/likes/like', locals: { tweet: tweet} %>
           </td>
           <td>
               PV数　<%= tweet.impressions_count %>
@@ -88,7 +88,7 @@
         <div class="col-md-3">
             <div class="d-culmn">
                 <div class="d-flex">
-                  <%= attachment_image_tag @customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+                  <%= attachment_image_tag @customer, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
                   <% if @customer.id == current_customer.id %>
                       <p><%= link_to "プロフィール編集", edit_customer_path(@customer) %></p><br>
                   <% end %>
@@ -138,7 +138,7 @@
         <tr>
           <td>
             <%= link_to customer_path(tweet.customer.id) do %>
-              <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br>
+              <%= attachment_image_tag tweet.customer, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br>
               <%= tweet.customer.name %>
             <% end %>
           </td>

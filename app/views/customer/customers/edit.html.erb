@@ -15,11 +15,11 @@
         <p><%= f.attachment_field :profile_image, placeholder: "プロフィール画像" %></p>
       </div>
       <div class="mb-3">
-         <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
+         <input type="submit" name="commit" value="更新" class="btn btn-secondary" data-disable-with="更新">
       <% end %>
       <%= link_to customer_unsubscribe_path(@customer) do %>
         <div class="btn btn-danger">
-          退会する
+          <p class="text-light my-0">退会する</p>
         <div>
       <% end %>
       </div>

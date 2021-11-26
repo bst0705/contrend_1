@@ -1,12 +1,12 @@
 <div class="container marketing">
   <div class="row d-flex justify-content-center">
     <div class="col-10 mt-5">
-      <h1>FOLLOWING</h1>
-      <table class="table text-center">
+      <h1>フォローリスト</h1>
+      <table class="table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th></th>
+            <th>投稿者</th>
+            <th class="text-left">自己紹介</th>
           </tr>
         </thead>
         <tbody>
@@ -18,8 +18,11 @@
                   <%= customer.name %>
                 <% end %>
               </td>
-              <td>
-                <div id="follows_buttons_<%= customer.id %>">
+              <td class="text-left align-middle">
+                <%= customer.introduction %>
+              </td>
+              <td class="text-left align-middle">
+                <div id="follows_buttons_<%= customer.id %>" class="align-middle text-nowrap">
                   <%= render partial: 'customer/customers/followbuttons', locals: { customer: customer} %>
                 </div>
               </td>

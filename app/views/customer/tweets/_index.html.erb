@@ -1,23 +1,39 @@
-<% tweets.each do |tweet| %>
-  <div class="container d-flex justify-content-center">
-    <div class="d-flex">
-      <div class="mr-auto">
-      <%= link_to customer_path(tweet.customer.id) do %>
-        <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></br>
-        <p><%= tweet.customer.name %></p>
-      <% end %>
-      </div>
 
-      <div class="ml-auto d-flex">
-        <%= link_to tweet_path(tweet.id) do %>
-          <%= attachment_image_tag tweet, :tweet_image, :fill, 60, 60, fallback: "no_image.jpg" %>
-          <p><%= tweet.title %></p>
-        <% end %>
-        <p>内容：<%= tweet.body %></p>
-        <div class="ml-auto pl-5">
-          PV数　<%= tweet.impressions_count %>
-        </div>
-      </div>
-    </div>
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <table class="table table-hover table-inverse">
+      <thead>
+        <tr>
+          <th class="text-center text-nowrap">投稿者</th>
+          <th class="text-center">投稿</th>
+          <th class="text-center"></th>
+          <th class="text-center text-nowrap"></th>
+        </tr>
+      </thead>
+      <% tweets.each do |tweet| %>
+      <tbody>
+        <tr>
+          <td class="align-middle text-center">
+            <%= link_to customer_path(tweet.customer.id) do %>
+              <%= attachment_image_tag tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></br>
+              <p><%= tweet.customer.name %></p>
+            <% end %>
+          </td>
+          <td class="align-middle text-center">
+            <%= link_to tweet_path(tweet.id) do %>
+              <%= attachment_image_tag tweet, :tweet_image, :fill, 60, 60, fallback: "no_image.jpg" %>
+              <p><%= tweet.title %></p>
+            <% end %>
+          </td>
+          <td class="align-middle text-wrap">
+            <p>内容：<%= tweet.body %></p>
+          </td>
+          <td class="align-middle text-nowrap">
+            PV数　<%= tweet.impressions_count %>
+          </td>
+        </tr>
+      </tbody>
+      <% end %>
+    </table>
   </div>
-<% end %>
+</div>

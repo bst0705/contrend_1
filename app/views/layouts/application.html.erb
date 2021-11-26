@@ -9,42 +9,33 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar navbar-expand">
+    <header class="w-100">
+      <nav class="navbar navbar-expand align-items-center h-100">
         <div class="container">
-          <a class="logo" href="/"><span><%= image_tag 'autumn-6769712_1280', size: '150x100' %></span></a>
+          <%= link_to tweets_path, class: 'logo text-light', data: {"turbolinks" => false} do %>
+            <span>Contrender</span>
+          <% end %>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto align-items-center">
               <% if admin_signed_in? %>
-                <li class="nav-item"><%= link_to "会員一覧", admin_customers_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "投稿一覧", admin_tweets_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "会員一覧", admin_customers_path, class:"nav-link text-light" %></li>
+                <li class="nav-item"><%= link_to "投稿一覧", admin_tweets_path, class:"nav-link text-light" %></li>
                 <!--<li class="nav-item"><%#= link_to "問い合わせ一覧", admin_contacts_path, class:"nav-link" %></li>-->
-                <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link" %></li>
+                <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link text-light" %></li>
                 <li class="nav-item"><%= render partial: 'admin/searches/searchform' %></li>
               <% elsif customer_signed_in? %>
-                <li class="nav-item"><%= link_to "おすすめ", monthrank_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "マイページ", customer_path(current_customer.id), class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "新規投稿", new_tweet_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "おすすめ", monthrank_path, class:"nav-link text-light", data: {"turbolinks" => false} %></li>
+                <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link text-light", data: {"turbolinks" => false}%></li>
+                <li class="nav-item"><%= link_to "マイページ", customer_path(current_customer.id), class:"nav-link text-light" %></li>
+                <li class="nav-item"><%= link_to "新規投稿", new_tweet_path, class:"nav-link text-light" %></li>
+                <li class="nav-item"><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"nav-lin text-light" %></li>
                 <li class="nav-item"><%= render partial: 'customer/searches/searchform' %></li>
-                <div class="row">
-                  <div id="box">
-                    <div id="images">
-                      <div class="image1"></div>
-                      <div class="image2"></div>
-                      <div class="image3"></div>
-                      <div class="image4"></div>
-                    </div>
-                  </div>
-                </div>
               <% else %>
-                <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "おすすめ", monthrank_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class:"nav-link" %></li>
-                <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class:"nav-link" %></li>
+                <li class="nav-item"><%= link_to "新着", tweets_path, class:"nav-link text-light", data: {"turbolinks" => false}%></li>
+                <li class="nav-item"><%= link_to "おすすめ", monthrank_path, class:"nav-link text-light", data: {"turbolinks" => false} %></li>
+                <li class="nav-item"><%= link_to "新規登録", new_customer_registration_path, class:"nav-link text-light" %></li>
+                <li class="nav-item"><%= link_to "ログイン", new_customer_session_path, class:"nav-link text-light" %></li>
                 <li class="nav-item"><%= render partial: 'customer/searches/searchform' %></li>
-                
               <% end %>
             </ul>
           </div>
@@ -52,19 +43,19 @@
       </nav>
     </header>
 
-    <main class="mb-5">
+    <main class="mb-5 mt-3">
     <%= yield %>
     </main>
 
     <footer class=" bg-dark text-white fixed-bottom">
       <div class='container mt-10'>
   	    <div class='row text-center'>
-    	    <div>
+    	    <div class="mx-auto">
     		    <p class=footer>contrender</p>
     	    </div>
-    	    <div class='ml-auto'>
-    		    <p class=footer>お問い合わせ</p>
-    	    </div>
+    	    <!--<div class='ml-auto'>-->
+    		   <!-- <p class=footer>お問い合わせ</p>-->
+    	    <!--</div>-->
         </div>
       </div>
     </footer>

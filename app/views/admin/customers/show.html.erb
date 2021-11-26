@@ -2,15 +2,12 @@
     <h2 class="customers my-4 px-1 text-center">
       <%= @customer.name %>さんの会員詳細
     </h2>
-
-    <table class="table border-0">
-        <tbody>
-          <tr>
-            <td class="border-0 text-left"></td>
-            <td class="border-0 text-left d-flex">
-              <p class="mr-4"><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></p>
-            </td>
-          </tr>
+    <table style="table-layout: fixed;" class="w-100 table border-0 table-hover table-inverse table-responsive">
+      <!--<thead width="100%">-->
+      <!--  <th width="50%"></th>-->
+      <!--  <th width="500%"></th>-->
+      <!--</thead>-->
+        <tbody width="80%" align="center"  class="mx-auto d-block justify-content-center">
           <tr>
             <td class="border-0 text-left">会員ID</td>
             <td class="border-0 text-left"><%= @customer.id %></td>
@@ -31,6 +28,11 @@
               <% else %>
                 <p class="text-muted">退会</p>
               <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="border-0 text-left d-flex">
+              <p class="mr-4"><%= link_to "編集する", edit_admin_customer_path(@customer.id), class: "btn btn-success" %></p>
             </td>
           </tr>
        </tbody>

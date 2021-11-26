@@ -17,32 +17,66 @@
  @import 'font-awesome-sprockets';
  @import 'font-awesome';
 
+
+ header{
+  height: 150px;
+  background-size: cover;
+  background-position: center;
+  background-image: url("<%= asset_path('road-1072823_1920.jpg') %>");
+ }
+
+ main{
+ }
+
+ .logo{
+  font-size: 20px;
+}
+
  #box{
   height: 150px;
   width: 60%;
+  margin: 0px auto;
 }
 
 .rankimages{
   display: block;
   height: 150px;
   width: 60%;
-  background-size: cover;
+  object-fit: contain;
   background-position: center;
 }
 
 .image1 {
   background-image: url("<%= asset_path('glasse-309405_640.png') %>");
   display: block;
+
 }
 .image2 {
   background-image: url("<%= asset_path('tiara-5890081_640.png') %>");
   display: block;
+
 }
 .image3 {
   background-image: url("<%= asset_path('tiara-5890097_640.png') %>");
   display: block;
+
 }
 .image4 {
   background-image: url("<%= asset_path('tiara-5890101_640.png') %>");
   display: block;
+
+}
+
+.imageitems{
+  width: 100%;
+  height: 10%;
+  vertical-align: middle;
+}
+
+tbody{
+  box-sizing:border-box;
+}
+
+.footer{
+  font-size: 20px;
 }

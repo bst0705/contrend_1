@@ -13,7 +13,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require jquery_ujs
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
@@ -41,6 +40,6 @@ $(document).ready(function () {
     // キーボードの矢印キーによるスライド送りの設定(trueで有効)
     keyboardOnAlways : true,
     // 一枚目のスライド表示時に戻る矢印を表示するかどうか(falseで非表示)
-    hidePrevious : false
+    hidePrevious : true
   });
 });

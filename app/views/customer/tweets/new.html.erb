@@ -1,17 +1,21 @@
-<h1>投稿をして経験を共有しよう！！</h1>
 <% if @tweet.errors.any? %>
   <%= @tweet.errors.count %>件のエラーが発生しました
   <% @tweet.errors.full_messages.each do |message| %>
     <%= message %>
   <% end %>
 <% end %>
+<div class="w-50 px-5 px-sm-0 mx-auto">
+    <h1>投稿をして経験を共有しよう</h1>
+    <div>
+      <%= form_with model: @tweet, local: true do |f| %>
+        <h4>タイトル</h4>
+        <%= f.text_field :title %>
+        <h4>内容</h4>
+        <%= f.text_area :body %>
+        <h4>画像</h4>
+        <%= f.attachment_field :tweet_image, class: "test" %>
+        <%= f.submit '投稿' %>
+      <% end %>
+    </div>
+</div>
 
-<%= form_with model: @tweet, local:true do |f| %>
-  <h4>タイトル</h4>
-  <%= f.text_field :title %>
-  <h4>内容</h4>
-  <%= f.text_area :body %>
-  <h4>画像</h4>
-  <%= f.attachment_field :tweet_image %>
-  <%= f.submit '投稿' %>
-<% end %>

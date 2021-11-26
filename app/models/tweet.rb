@@ -8,7 +8,7 @@ class Tweet < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :impressions, dependent: :destroy
-  
+
   validates :title, presence: true
   validates :body, presence: true
 

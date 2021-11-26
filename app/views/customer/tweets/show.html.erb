@@ -4,55 +4,72 @@
     <%= message %>
   <% end %>
 <% end %>
-<table class="table">
+<table class="table table-hover table-inverse table-responsive">
+  <thead >
+    <tr>
+      <th>投稿者</th>
+      <th colspan="4">投稿</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>
-        <%= link_to customer_path(@tweet.customer.id) do %>
-          <%= attachment_image_tag @tweet.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></br>
-          <%= @tweet.customer.name %>
-        <% end %>
+      <td style="width:5%" class="align-middle text-nowrap">
+        <%= attachment_image_tag @tweet.customer, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></br>
+        <%= @tweet.customer.name %>
       </td>
-      <td>
-        <%= link_to tweet_path(@tweet.id) do %>
-        <%= @tweet.title %><br>
-        <% end %>
+      <td class="align-middle text-nowrap">
+        <%= attachment_image_tag @tweet, :tweet_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br>
+        <%= @tweet.title %>
       </td>
-      <td id="likes_buttons_<%= @tweet.id %>">
+      <td class="align-middle text-nowrap">
+        <%= @tweet.body %>
+      </td>
+      <td id="likes_buttons_<%= @tweet.id %>" class="align-middle text-nowrap">
         <%= render partial: 'customer/likes/like', locals: { tweet: @tweet} %>
       </td>
-      <td><%= @tweet.body %></td>
-      <td>PV数　<%= @tweet.impressions_count %></td>
-      <td>
+      <td class="align-middle text-nowrap">
+        PV数　<%= @tweet.impressions_count %>
+      </td>
+      <td class="align-middle text-nowrap">
         <% if @tweet.customer_id == current_customer.id %>
-        <%= link_to "Edit", edit_tweet_path(@tweet), class: "btn btn-success" %>
+        <%= link_to "編集", edit_tweet_path(@tweet), class: "btn btn-success" %>
         <% end %>
       </td>
-      <td>
+      <td class="align-middle text-nowrap">
         <% if @tweet.customer_id == current_customer.id %>
-          <%= link_to "Destroy", tweet_path(@tweet), class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"}, method: :delete %>
+          <%= link_to "削除", tweet_path(@tweet), class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"}, method: :delete %>
         <% end %>
       </td>
     </tr>
     <tr>
-      <td>
-        <p>コメント件数：<%= @tweet.comments.count %></p>
+      <td class="align-middle text-nowrap">
+        コメント件数：<%= @tweet.comments.count %>
       </td>
     </tr>
     <% @tweet.comments.each do |tweet_comment| %>
     <tr>
       <td>
         <%= link_to customer_path(tweet_comment.customer.id) do %>
-          <%= attachment_image_tag tweet_comment.customer, :profile_image_id, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></br>
+          <%= attachment_image_tag tweet_comment.customer, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %></br>
           <%= tweet_comment.customer.name %>
         <% end %>
-        <%= tweet_comment.created_at.strftime('%Y/%m/%d') %><%= tweet_comment.comment %>
+      </td>
+      <td class="align-middle">
+        <p>更新日時<%= tweet_comment.created_at.strftime('%Y/%m/%d') %><p>
+      </td>
+      <td class="align-middle">
+        <%= tweet_comment.comment %>
       </td>
     </tr>
     <tr>
       <td>
         <% if tweet_comment.customer_id == current_customer.id %>
-          <%= link_to "Destroy", tweet_comment_path(tweet_comment.tweet, tweet_comment), class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"}, method: :delete %>
+          <%= link_to "削除", tweet_comment_path(tweet_comment.tweet, tweet_comment), class: "btn btn-sm btn-danger", data: {confirm: "本当に削除しますか？"}, method: :delete %>
         <% end %>
       </td>
     </tr>

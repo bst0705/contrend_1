@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_050515) do
+ActiveRecord::Schema.define(version: 2021_11_24_114913) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -125,7 +125,6 @@ ActiveRecord::Schema.define(version: 2021_11_22_050515) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "tweet_image"
     t.string "tweet_image_id"
   end
 
