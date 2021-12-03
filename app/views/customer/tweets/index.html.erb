@@ -11,12 +11,12 @@
       <% end %>
     </div>
     <div class="image3">
-      <%= link_to weekrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
+      <%= link_to monthrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
         <div class="align-items-center imageitems text-center display-4 text-primary lead">月間ランキングへ</div>
       <% end %>
     </div>
     <div class="image4">
-      <%= link_to weekrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
+      <%= link_to yearrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
         <div class="align-items-center imageitems text-center display-4 text-primary lead">年間ランキングへ</div>
       <% end %>
     </div>
@@ -54,7 +54,8 @@
             <p>内容：<%= tweet.body %></p>
           </td>
           <td class="align-middle text-nowrap">
-            PV数　<%= tweet.impressions_count %>
+            PV数　<%= tweet.impressions_count %></br>
+            <%= tweet.updated_at.strftime("%Y-%m-%d %H:%M") %>
           </td>
         </tr>
       </tbody>

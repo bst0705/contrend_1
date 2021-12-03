@@ -11,13 +11,13 @@
       <% end %>
     </div>
     <div class="image3">
-      <%= link_to weekrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
+      <%= link_to monthrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
         <div class="align-items-center imageitems text-center display-4 text-primary lead">月間ランキングへ</div>
       <% end %>
     </div>
     <div class="image4">
-      <%= link_to weekrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
-        <div class="align-items-center imageitems text-center display-4 text-primary lead">ランキングへ</div>
+      <%= link_to yearrank_path, class: 'rankimages w-100 d-flex align-items-center justify-content-center', data: {"turbolinks" => false} do %>
+        <div class="align-items-center imageitems text-center display-4 text-primary lead">年間ランキングへ</div>
       <% end %>
     </div>
   </div>
@@ -30,8 +30,8 @@
         <tr>
           <th class="text-center text-nowrap">順位</th>
           <th class="text-center text-nowrap">いいね数</th>
-          <th colspan="3" class="text-center">投稿者</th>
-          <th class="text-center">投稿</th>
+          <th class="text-center">投稿者</th>
+          <th colspan="2" class="text-center">投稿</th>
           <th class="text-center text-nowrap"></th>
         </tr>
       </thead>
@@ -40,7 +40,6 @@
         <tr>
           <td class="align-middle text-nowrap">
             <p>第<%= i %>位</p>
-
           </td>
           <td id="likes_buttons_<%= tweet.id %>" class="align-middle text-nowrap">
             <%= render partial: 'customer/likes/like', locals: { tweet: tweet} %>
@@ -61,7 +60,8 @@
             <p>内容：<%= tweet.body %></p>
           </td>
           <td class="align-middle text-nowrap">
-            PV数　<%= tweet.impressions_count %>
+            PV数　<%= tweet.impressions_count %></br>
+            <%= tweet.updated_at.strftime("%Y-%m-%d %H:%M") %>
           </td>
         </tr>
       </tbody>
